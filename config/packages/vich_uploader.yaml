@@ -1,0 +1,8 @@
+vich_uploader:
+    db_driver: orm # or mongodb or phpcr
+
+    mappings:
+        post_file:
+            uri_prefix: /upload/posts/files
+            upload_destination: '%kernel.project_dir%/public/upload/posts/files'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer

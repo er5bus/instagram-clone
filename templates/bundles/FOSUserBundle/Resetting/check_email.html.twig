@@ -1,0 +1,26 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+<div class="login__section login__sign-in">
+  <img
+    src="{{ asset('assets/images/logo.png') }}"
+    alt="Logo"
+    title="Logo"
+    class="login__logo"
+  />
+  <div class="login__form">
+    <p class="login__text">{{ 'resetting.check_email'|trans({'%tokenLifetime%': tokenLifetime})|nl2br }}</p>
+  </div>
+</div>
+<div class="login__section login__sign-up">
+    <p class="login__text">
+      {{ "Back to "|trans }}
+      <a href="{{ url('fos_user_security_login') }}" class="login__link">
+        <strong>{{ "Log in"|trans }}</strong>
+      </a>
+    </p>
+</div>
+
+{% endblock %}

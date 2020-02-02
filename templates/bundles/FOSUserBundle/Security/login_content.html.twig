@@ -1,0 +1,50 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="login__section login__sign-in">
+  <img
+    src="{{ asset('assets/images/logo.png') }}"
+    alt="Logo"
+    title="Logo"
+    class="login__logo"
+  />
+
+  <!-- x   -->
+  <form novalidate  action="{{ path("fos_user_security_check") }}" class="login__form" method="post">
+  {% if csrf_token %}
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+  {% endif %}
+
+    <div class="form__input-container">
+<input type="text" id="username" placeholder="{{ 'security.login.username'|trans }}" name="_username" value="{{ last_username }}" required="required" autocomplete="username" class="form__input" />
+    </div>
+    <div class="form__input-container">
+        <input type="password" class="form__input" placeholder="{{ 'security.login.password'|trans }}" id="password" name="_password" required="required" autocomplete="current-password" />
+    </div>
+    <div class="form__input-container">
+      <input type="checkbox" id="remember_me" name="_remember_me" value="on" class="form__input--checkbox"/>
+      <label>{{ 'security.login.remember_me'|trans }}</label>
+    </div>
+    <div class="form__input-container">
+      <input
+        type="submit"
+        value="{{ 'security.login.submit'|trans }}"
+        class="form__input form__input--btn"
+      />
+    </div>
+  </form>
+    <span class="login__divider">{{ "or"|trans }}</span>
+    {% if error %}
+      <div class="msg-error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+    <a href="{{ url('fos_user_resetting_request') }}" class="login__link">{{ 'Forgot password ?'|trans }}</a>
+  </div>
+  <div class="login__section login__sign-up">
+    <span class="login__text">
+      {{ "Don't have an account?"|trans }}
+      <a href="{{ url('fos_user_registration_register') }}" class="login__link">
+        {{ "Sign up"|trans }}
+      </a>
+    </span>
+  </div>
+</div>
+
