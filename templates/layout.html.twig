@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  <link href="{{ asset('assets/css/profile.css') }}" rel="stylesheet" />
+  <link href="{{ asset('assets/css/navigation.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
+  {% include "navigation.html.twig" %}
+  {% block content %}
+  {% endblock %}
+{% endblock %}

@@ -3,27 +3,27 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block fos_user_content %}
-<div class="login__section login__sign-in">
-  <img
+  <div class="login__section login__sign-in">
+    <img
     src="{{ asset('assets/images/logo.png') }}"
     alt="Logo"
     title="Logo"
     class="login__logo"
-  />
+    />
 
     <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
     {% if targetUrl %}
-    <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
+      <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
     {% endif %}
-</div>
+  </div>
 
-<div class="login__section login__sign-up">
+  <div class="login__section login__sign-up">
     <p class="login__text">
       {{ "Go to "|trans }}
       <a href="{{ url('fos_user_profile_show') }}" class="login__link">
         <strong>{{ "Your Profile"|trans }}</strong>
       </a>
     </p>
-</div>
+  </div>
 
 {% endblock fos_user_content %}

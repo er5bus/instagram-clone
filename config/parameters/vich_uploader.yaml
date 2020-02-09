@@ -1,0 +1,3 @@
+parameters:
+  app.path.post_file:  /upload/posts/files 
+  app.path.profile_image: /upload/profile/images

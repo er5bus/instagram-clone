@@ -1,6 +1,110 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<div class="fos_user_user_show">
-    <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
-    <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
-</div>
+<section class="profile-header">
+
+  <div class="container">
+    <div class="profile">
+
+      <div class="profile-image">
+        <img src="{{ vich_uploader_asset(user)|default(asset('assets/images/profile.jpg')) }}" alt="">
+      </div>
+
+      <div class="profile-user-settings">
+        <h1 class="profile-user-name">{{ user.username }}</h1>
+        <a href="{{ url('fos_user_profile_edit') }}" class="btn profile-edit-btn">{{ 'Edit Profile'|trans }}</a>
+        <button class="btn profile-settings-btn" aria-label="profile settings">
+          <i class="fas fa-cog" aria-hidden="true"></i>
+        </button>
+
+      </div>
+
+      <div class="profile-stats">
+
+        <ul>
+          <li><span class="profile-stat-count">164</span> posts</li>
+          <li><span class="profile-stat-count">188</span> followers</li>
+          <li><span class="profile-stat-count">206</span> following</li>
+        </ul>
+
+      </div>
+
+      <div class="profile-bio">
+        <p class="profile-real-name">{{ user.fullname }}</span>
+        <p class="profile-about">{{ user.about }}</p>
+      </div>
+
+    </div>
+    <!-- End of profile section -->
+
+  </div>
+  <!-- End of container -->
+
+</section>
+
+<main>
+
+  <div class="container">
+
+    <div class="gallery row">
+
+      <div class="col-md-4 col-sm-6 col-xs-12">
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb" class="gallery-image"alt="">
+          <div class="gallery-item-info">
+            <ul>
+              <li class="gallery-item-likes">
+                <span class="visually-hidden">Likes:</span>
+                <i class="fas fa-heart" aria-hidden="true"></i> 56
+              </li>
+              <li class="gallery-item-comments">
+                <span class="visually-hidden">Comments:</span>
+                <i class="fas fa-comment" aria-hidden="true"></i> 2
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-sm-6 col-xs-12">
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb" class="gallery-image"alt="">
+          <div class="gallery-item-info">
+            <ul>
+              <li class="gallery-item-likes">
+                <span class="visually-hidden">Likes:</span>
+                <i class="fas fa-heart" aria-hidden="true"></i> 56
+              </li>
+              <li class="gallery-item-comments">
+                <span class="visually-hidden">Comments:</span>
+                <i class="fas fa-comment" aria-hidden="true"></i> 2
+              </li>
+            </ul>
+          </div>
+        </div></div>
+
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb" class="gallery-image"alt="">
+            <div class="gallery-item-info">
+              <ul>
+                <li class="gallery-item-likes">
+                  <span class="visually-hidden">Likes:</span>
+                  <i class="fas fa-heart" aria-hidden="true"></i> 56
+                </li>
+                <li class="gallery-item-comments">
+                  <span class="visually-hidden">Comments:</span>
+                  <i class="fas fa-comment" aria-hidden="true"></i> 2
+                </li>
+              </ul>
+            </div>
+          </div></div>
+
+    </div>
+    <!-- End of gallery -->
+
+
+  </div>
+  <!-- End of container -->
+
+  <div class="loader"></div>
+</main>

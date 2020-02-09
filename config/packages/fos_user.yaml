@@ -2,6 +2,9 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb' and 'couchdb'
     firewall_name: main
     user_class: App\Entity\User
+    profile:
+      form:
+        type: App\Form\ProfileFormType
     registration:
         form:
             type: App\Form\RegistrationType

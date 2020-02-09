@@ -2,22 +2,22 @@
 
 <div class="login__section login__sign-in">
   <img
-    src="{{ asset('assets/images/logo.png') }}"
-    alt="Logo"
-    title="Logo"
-    class="login__logo"
+  src="{{ asset('assets/images/logo.png') }}"
+  alt="Logo"
+  title="Logo"
+  class="login__logo"
   />
 
   <!-- x   -->
   {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'login__form'}}) }}
 
-    <div class="login__input-container">
-        {{ form_row(form.email) }}
-        {{ form_row(form.fullName) }}
-        {{ form_row(form.username) }}
-        {{ form_rest(form) }}
-        <input type="submit" class="form__input form__input--btn" value="{{ 'registration.submit'|trans }}" />
-    </div>
+  <div class="login__input-container">
+    {{ form_row(form.email) }}
+    {{ form_row(form.fullName) }}
+    {{ form_row(form.username) }}
+    {{ form_rest(form) }}
+    <input type="submit" class="form__input form__input--btn" value="{{ 'registration.submit'|trans }}" />
+  </div>
 
   {{ form_end(form) }}
 </div>

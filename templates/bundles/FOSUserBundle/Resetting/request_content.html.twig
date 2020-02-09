@@ -1,35 +1,35 @@
 {% trans_default_domain 'FOSUserBundle' %}
 <div class="login__section login__sign-in">
   <img
-    src="{{ asset('assets/images/logo.png') }}"
-    alt="Logo"
-    title="Logo"
-    class="login__logo"
+  src="{{ asset('assets/images/logo.png') }}"
+  alt="Logo"
+  title="Logo"
+  class="login__logo"
   />
 
   <!-- x   -->
 
-    <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="login__form">
-      <div class="login__input-container">
-        <input type="text"  class="form__input" placeholder="{{ 'resetting.request.username'|trans }}" id="username" name="username" required="required" />
-        <input type="submit" class="form__input form__input--btn" value="{{ 'resetting.request.submit'|trans }}" />
+  <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="login__form">
+    <div class="login__input-container">
+      <input type="text"  class="form__input" placeholder="{{ 'resetting.request.username'|trans }}" id="username" name="username" required="required" />
+      <input type="submit" class="form__input form__input--btn" value="{{ 'resetting.request.submit'|trans }}" />
     </div>
   </form>
   <span class="login__divider">{{ "or"|trans }}</span>
-    <p class="login__text">
-      {{ "Don't have an account?"|trans }}
-      <a href="{{ url('fos_user_registration_register') }}" class="login__link">
-        {{ "Sign up"|trans }}
-      </a>
-    </p>
+  <p class="login__text">
+    {{ "Don't have an account?"|trans }}
+    <a href="{{ url('fos_user_registration_register') }}" class="login__link">
+      {{ "Sign up"|trans }}
+    </a>
+  </p>
 </div>
 
 <div class="login__section login__sign-up">
-    <p class="login__text">
-      {{ "Back to "|trans }}
-      <a href="{{ url('fos_user_security_login') }}" class="login__link">
-        {{ "Log in"|trans }}
-      </a>
-    </p>
+  <p class="login__text">
+    {{ "Back to "|trans }}
+    <a href="{{ url('fos_user_security_login') }}" class="login__link">
+      {{ "Log in"|trans }}
+    </a>
+  </p>
 </div>
 

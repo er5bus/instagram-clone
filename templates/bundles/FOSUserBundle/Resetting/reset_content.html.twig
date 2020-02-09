@@ -1,16 +1,16 @@
 {% trans_default_domain 'FOSUserBundle' %}
 <div class="login__section login__sign-in">
   <img
-    src="{{ asset('assets/images/logo.png') }}"
-    alt="Logo"
-    title="Logo"
-    class="login__logo"
+  src="{{ asset('assets/images/logo.png') }}"
+  alt="Logo"
+  title="Logo"
+  class="login__logo"
   />
- 
+
   {{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'login__form' } }) }}
-     <div class="login__form">
-        {{ form_widget(form) }}
-        <input type="submit" class="form__input form__input--btn" value="{{ 'resetting.reset.submit'|trans }}" />
-    </div>
+  <div class="login__form">
+    {{ form_widget(form) }}
+    <input type="submit" class="form__input form__input--btn" value="{{ 'resetting.reset.submit'|trans }}" />
+  </div>
   {{ form_end(form) }}
 </div>

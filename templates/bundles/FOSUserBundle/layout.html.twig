@@ -1,1 +1,43 @@
-{% extends 'authentication_layout.html.twig' %}
+{% extends 'base.html.twig' %}
+
+
+{% block stylesheets %}
+  {{ parent() }}
+  <link href="{{ asset('assets/css/login.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
+  {% block already_login %}
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+      <div class="warning">
+        {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+        <a href="{{ path('fos_user_security_logout') }}">
+          {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+        </a>
+      </div>
+    {% endif %}
+  {% endblock %}
+
+  {% if app.request.hasPreviousSession %}
+    {% for type, messages in app.session.flashbag.all() %}
+      {% for message in messages %}
+        <div class="warning flash-{{ type }}">{{ message }}</div>
+      {% endfor %}
+    {% endfor %}
+  {% endif %}
+
+  <main class="login">
+    <div class="login__column">
+      <img
+      src="{{ asset('assets/images/phone.png') }}"
+      alt="Phone Image"
+      title="Phone Image"
+      class="login__phone-image"
+      />
+    </div>
+    <section class="login__column">
+      {% block fos_user_content %}
+      {% endblock fos_user_content %}
+    </section>
+  </main>
+{% endblock %}

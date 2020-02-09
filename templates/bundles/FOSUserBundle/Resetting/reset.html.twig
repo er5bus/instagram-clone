@@ -1,5 +1,7 @@
 {% extends "@FOSUser/layout.html.twig" %}
+{% form_theme form '_form/login_form.html.twig' %}
+
 
 {% block fos_user_content %}
-{% include "@FOSUser/Resetting/reset_content.html.twig" %}
+  {% include "@FOSUser/Resetting/reset_content.html.twig" %}
 {% endblock fos_user_content %}

@@ -1,0 +1,26 @@
+<nav class="navigation">
+  <a href="feed.html">
+    <img
+    src="{{ asset('assets/images/navLogo.png') }}"
+    alt="logo"
+    title="logo"
+    class="navigation__logo"
+    />
+  </a>
+  <div class="navigation__search-container">
+    <i class="fa fa-search"></i>
+    <input type="text" placeholder="Search">
+  </div>
+  <div class="navigation__icons">
+    <a href="explore.html" class="navigation__link">
+      <i class="fa fa-compass"></i>
+    </a>
+    <a href="#" class="navigation__link">
+      <i class="fa fa-heart-o"></i>
+    </a>
+    <a href="{{ url('fos_user_profile_show') }}" class="navigation__link">
+      <i class="fa fa-user-o"></i>
+    </a>
+  </div>
+</nav>
+
