@@ -1,5 +1,6 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
+
 <section class="profile-header">
 
   <div class="container">
@@ -11,7 +12,15 @@
 
       <div class="profile-user-settings">
         <h1 class="profile-user-name">{{ user.username }}</h1>
-        <a href="{{ url('fos_user_profile_edit') }}" class="btn profile-edit-btn">{{ 'Edit Profile'|trans }}</a>
+        {% if app.user.id == user.id %}
+          <a href="{{ url('fos_user_profile_edit') }}" class="btn profile-edit-btn">{{ 'Edit Profile'|trans }}</a>
+        {% else %}
+          {% if user.hasFollower(app.user) %}
+            <a href="{{ url('unfollow', {'id': user.id }) }}">{{ 'UnFollow'|trans }}</a>
+          {% else %}
+            <a href="{{ url('follow', {'id': user.id }) }}">{{ 'Follow'|trans }}</a>
+          {% endif %}
+        {% endif %}
         <button class="btn profile-settings-btn" aria-label="profile settings">
           <i class="fas fa-cog" aria-hidden="true"></i>
         </button>
@@ -21,9 +30,9 @@
       <div class="profile-stats">
 
         <ul>
-          <li><span class="profile-stat-count">164</span> posts</li>
-          <li><span class="profile-stat-count">188</span> followers</li>
-          <li><span class="profile-stat-count">206</span> following</li>
+          <li><span class="profile-stat-count">{{ user.posts|length }}</span> {{ 'posts'|trans }}</li>
+          <li><span class="profile-stat-count">{{ user.followeds|length }}</span> {{ 'followers'|trans }}</li>
+          <li><span class="profile-stat-count">{{ user.followeds|length }}</span> {{ 'following'|trans }}</li>
         </ul>
 
       </div>
@@ -45,60 +54,16 @@
 
   <div class="container">
 
-    <div class="gallery row">
-
-      <div class="col-md-4 col-sm-6 col-xs-12">
-        <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb" class="gallery-image"alt="">
-          <div class="gallery-item-info">
-            <ul>
-              <li class="gallery-item-likes">
-                <span class="visually-hidden">Likes:</span>
-                <i class="fas fa-heart" aria-hidden="true"></i> 56
-              </li>
-              <li class="gallery-item-comments">
-                <span class="visually-hidden">Comments:</span>
-                <i class="fas fa-comment" aria-hidden="true"></i> 2
-              </li>
-            </ul>
+    <div class="w3-row w3-container">
+      {% for post in user.posts %}
+        <div class="w3-col s4">
+          <div class="gallery-item js-slide-show">
+            {% for imageFile in post.postContent %}
+              <a href={{ url('post_show', {'id': post.id}) }}><img class="gallery-image" src="{{ vich_uploader_asset(imageFile) }}" /></a>
+            {% endfor %}
           </div>
         </div>
-      </div>
-
-      <div class="col-md-4 col-sm-6 col-xs-12">
-        <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb" class="gallery-image"alt="">
-          <div class="gallery-item-info">
-            <ul>
-              <li class="gallery-item-likes">
-                <span class="visually-hidden">Likes:</span>
-                <i class="fas fa-heart" aria-hidden="true"></i> 56
-              </li>
-              <li class="gallery-item-comments">
-                <span class="visually-hidden">Comments:</span>
-                <i class="fas fa-comment" aria-hidden="true"></i> 2
-              </li>
-            </ul>
-          </div>
-        </div></div>
-
-        <div class="col-md-4 col-sm-6 col-xs-12">
-          <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb" class="gallery-image"alt="">
-            <div class="gallery-item-info">
-              <ul>
-                <li class="gallery-item-likes">
-                  <span class="visually-hidden">Likes:</span>
-                  <i class="fas fa-heart" aria-hidden="true"></i> 56
-                </li>
-                <li class="gallery-item-comments">
-                  <span class="visually-hidden">Comments:</span>
-                  <i class="fas fa-comment" aria-hidden="true"></i> 2
-                </li>
-              </ul>
-            </div>
-          </div></div>
-
+      {% endfor %}
     </div>
     <!-- End of gallery -->
 
@@ -106,5 +71,4 @@
   </div>
   <!-- End of container -->
 
-  <div class="loader"></div>
 </main>

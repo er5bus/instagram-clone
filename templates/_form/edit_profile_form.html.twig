@@ -68,8 +68,9 @@
         {% if not compound -%}
             {% set label_attr = label_attr|merge({'for': id}) %}
         {%- endif -%}
+        {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ 'edit-profile__label')|trim}) %}
         {% if required -%}
-            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ 'edit-profile__label')|trim}) %}
+            {% set label = label ~ " *" %}
         {%- endif -%}
         {% if label is empty -%}
             {%- if label_format is not empty -%}

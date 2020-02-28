@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PostRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Post
 {
@@ -24,7 +25,7 @@ class Post
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\UploadedFile", mappedBy="post")
+     * @ORM\OneToMany(targetEntity="App\Entity\ImageFile", mappedBy="post")
      */
     private $postContent;
 
@@ -33,16 +34,10 @@ class Post
      */
     private $author;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Thread", mappedBy="post")
-     */
-    private $comments;
-
 
     public function __construct()
     {
         $this->postContent = new ArrayCollection();
-        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -51,14 +46,14 @@ class Post
     }
 
     /**
-     * @return Collection|UploadedFile[]
+     * @return Collection|ImageFile[]
      */
     public function getPostContent(): Collection
     {
         return $this->postContent;
     }
 
-    public function addPostContent(UploadedFile $postContent): self
+    public function addPostContent(ImageFile $postContent): self
     {
         if (!$this->postContent->contains($postContent)) {
             $this->postContent[] = $postContent;
@@ -68,7 +63,7 @@ class Post
         return $this;
     }
 
-    public function removePostContent(UploadedFile $postContent): self
+    public function removePostContent(ImageFile $postContent): self
     {
         if ($this->postContent->contains($postContent)) {
             $this->postContent->removeElement($postContent);
@@ -105,33 +100,14 @@ class Post
         return $this;
     }
 
-    /**
-     * @return Collection|Thread[]
-     */
-    public function getComments(): Collection
+    public function getImageFiles(): ?array
     {
-        return $this->comments;
+        return $this->imageFiles;
     }
 
-    public function addComment(Thread $comment): self
+    public function setImageFiles(array $imageFiles): self
     {
-        if (!$this->comments->contains($comment)) {
-            $this->comments[] = $comment;
-            $comment->setPost($this);
-        }
-
-        return $this;
-    }
-
-    public function removeComment(Thread $comment): self
-    {
-        if ($this->comments->contains($comment)) {
-            $this->comments->removeElement($comment);
-            // set the owning side to null (unless already changed)
-            if ($comment->getPost() === $this) {
-                $comment->setPost(null);
-            }
-        }
+        $this->imageFiles = $imageFiles;
 
         return $this;
     }

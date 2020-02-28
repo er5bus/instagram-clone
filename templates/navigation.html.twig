@@ -1,5 +1,5 @@
 <nav class="navigation">
-  <a href="feed.html">
+  <a href="{{ url('post_index') }}">
     <img
     src="{{ asset('assets/images/navLogo.png') }}"
     alt="logo"
@@ -12,14 +12,17 @@
     <input type="text" placeholder="Search">
   </div>
   <div class="navigation__icons">
-    <a href="explore.html" class="navigation__link">
+    <a href="{{ url('user_index') }}" class="navigation__link">
       <i class="fa fa-compass"></i>
     </a>
-    <a href="#" class="navigation__link">
-      <i class="fa fa-heart-o"></i>
+    <a href="{{ url('post_new') }}" class="navigation__link">
+      <i class="fas fa-camera-retro"></i>
     </a>
     <a href="{{ url('fos_user_profile_show') }}" class="navigation__link">
-      <i class="fa fa-user-o"></i>
+      <i class="fas fa-user-circle"></i>
+    </a>
+    <a href="{{ url('fos_user_security_logout') }}" class="navigation__link">
+      <i class="fas fa-sign-out-alt"></i>
     </a>
   </div>
 </nav>

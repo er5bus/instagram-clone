@@ -1,0 +1,46 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Post index{% endblock %}
+
+
+{% block stylesheets %}
+  {{ parent() }}
+  <link href="{{ asset('assets/css/explore.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+  <main class="explore">
+    <section class="people">
+      <ul class="people__list">
+        {% for user in users if not user.isSuperAdmin() %}
+            <li class="people__person">
+              <div class="people__column">
+                <div class="people__avatar-container">
+                  <img href="#"
+                  src="{{ vich_uploader_asset(user)|default(asset('assets/images/profile.jpg')) }}"
+                  class="people__avatar"
+                  />
+                </div>
+                <div class="people__info">
+                  <a href="{{ url("user_show", {'id': user.id}) }}">
+                    <span class="people__username">{{ user.username }} </span>
+                    <span class="people__full-name">{{ user.fullname }}</span>
+                  </a>
+                </div>
+              </div>
+              <div class="people__column">
+                {% if user.hasFollowed(app.user) %}
+                  <a class="button" href="{{ url('unfollow', {'id': user.id }) }}">{{ 'UnFollow'|trans }}</a>
+                {% else %}
+                  <a class="button" href="{{ url('follow', {'id': user.id }) }}">{{ 'Follow'|trans }}</a>
+                {% endif %}
+              </div>
+            </li>
+        {% else %}
+          <div>{{ 'Opps! No one here'|trans }}</div>
+        {% endfor %}
+      </ul>
+    </section>
+  </main>
+{% endblock %}
+

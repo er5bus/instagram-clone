@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\UpdatedAt;
+use App\Entity\ImageFile;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * @method UpdatedAt|null find($id, $lockMode = null, $lockVersion = null)
- * @method UpdatedAt|null findOneBy(array $criteria, array $orderBy = null)
- * @method UpdatedAt[]    findAll()
- * @method UpdatedAt[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method ImageFile|null find($id, $lockMode = null, $lockVersion = null)
+ * @method ImageFile|null findOneBy(array $criteria, array $orderBy = null)
+ * @method ImageFile[]    findAll()
+ * @method ImageFile[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class UpdatedAtRepository extends ServiceEntityRepository
+class ImageFileRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, UpdatedAt::class);
+        parent::__construct($registry, ImageFile::class);
     }
 
     // /**
-    //  * @return UpdatedAt[] Returns an array of UpdatedAt objects
+    //  * @return ImageFile[] Returns an array of ImageFile objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class UpdatedAtRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?UpdatedAt
+    public function findOneBySomeField($value): ?ImageFile
     {
         return $this->createQueryBuilder('u')
             ->andWhere('u.exampleField = :val')

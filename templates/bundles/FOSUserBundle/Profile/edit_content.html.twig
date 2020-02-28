@@ -8,7 +8,7 @@
       </div>
       <h4 class="profile-form__title">{{ app.user.username }}</h4>
     </header>
-    {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+    {{ form_start(form, { 'action': path('fos_user_profile_edit')}) }}
     {{ form_widget(form) }}
     <div class="edit-profile__form-row">
       <label class="edit-profile__label"></label>

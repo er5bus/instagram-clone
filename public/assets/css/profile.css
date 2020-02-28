@@ -142,6 +142,7 @@ img {
 .gallery-item {
   color: #fff;
   cursor: pointer;
+  padding: 20px;
 }
 
 .gallery-item:hover .gallery-item-info,

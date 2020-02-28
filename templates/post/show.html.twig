@@ -1,0 +1,49 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Post show{% endblock %}
+
+
+{% block stylesheets %}
+  {{ parent() }}
+  <link href="{{ asset('assets/css/feed.css') }}" rel="stylesheet" />
+  <link href="{{ asset('assets/plugin/slick/css/slick.css') }}" rel="stylesheet" />
+  <link href="{{ asset('assets/plugin/slick/css/slick-theme.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+  <main class="feed">
+      <section class="photo">
+        <header class="photo__header">
+          <div class="photo__header-column">
+            <img class="photo__avatar" src="{{ vich_uploader_asset(post.author)|default(asset('assets/images/profile.jpg')) }}">
+          </div>
+          <div class="photo__header-column">
+            <span class="photo__username">{{ post.author.fullname }}</span>
+            <span class="photo__location">{{ post.description }}</span>
+          </div>
+        </header>
+        <div class="photo__file-container js-slide-show">
+          {% for imageFile in post.postContent %}
+            <div class=""><img class="photo__file" src="{{ vich_uploader_asset(imageFile) }}"></div>
+          {% endfor %}
+        </div>
+      </section>
+  </main>
+  </tbody>
+  </table>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('assets/plugin/slick/js/slick.min.js') }}"></script>
+
+  <script>
+    $('.js-slide-show').slick({
+      dots: false,
+      infinite: true,
+      speed: 300,
+      slidesToShow: 1,
+      adaptiveHeight: true
+    });
+  </script>
+{% endblock %}

@@ -1,3 +1,7 @@
+.explore {
+  padding-top: 15rem;
+}
+
 .people{
     width:60%;
     border-radius: 3px;
@@ -49,7 +53,7 @@
     color:#999;
 }
 
-.people__column a{
+.people__column .button{
     background-color: #3897f0;
     padding:7px 13px;
     color:white;

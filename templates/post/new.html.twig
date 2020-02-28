@@ -1,0 +1,40 @@
+{% extends 'layout.html.twig' %}
+{% form_theme form '_form/edit_profile_form.html.twig' %}
+
+  {% block title %}New Post{% endblock %}
+
+  {% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('assets/css/edit-profile.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugin/fileuploader/css/file-upload-with-preview.min.css') }}">
+  {% endblock %}
+
+  {% block content %}
+    <main class="edit-profile">
+      <section class="profile-form">
+        <header class="profile-form__header">
+          <div class="profile-form__avatar-container">
+            <img src="{{ vich_uploader_asset(app.user)|default(asset('assets/images/profile.jpg')) }}" class="profile-form__avatar">
+          </div>
+          <h4 class="profile-form__title">{{ app.user.username }}</h4>
+        </header>
+        {{ include('post/_form.html.twig') }}
+      </section>
+    </main>
+  {% endblock %}
+
+  {% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/plugin/fileuploader/js/file-upload-with-preview.min.js') }}"></script>
+
+    <script>
+      var upload = new FileUploadWithPreview('myUniqueUploadId', {
+        showDeleteButtonOnImages: true,
+        text: {
+          chooseFile: 'Custom Placeholder Copy',
+          browse: 'Custom Button Copy',
+          selectedCount: 'Custom Files Selected Copy',
+        },
+      })
+    </script>
+  {% endblock %}

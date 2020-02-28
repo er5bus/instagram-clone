@@ -7,9 +7,10 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\UploadedFileRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ImageFileRepository")
+ * @Vich\Uploadable
  */
-class UploadedFile
+class ImageFile
 {
     /**
      * @ORM\Id()
@@ -30,7 +31,7 @@ class UploadedFile
 
     /**
      *
-     * @Vich\UploadableField(mapping="post_file", fileNameProperty="fileName", size="imageSize")
+     * @Vich\UploadableField(mapping="post_file", fileNameProperty="fileName", size="fileSize")
      *
      * @ORM\Column(type="text", nullable=true)
      */
@@ -89,14 +90,14 @@ class UploadedFile
 
     /**
      * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
-     * of 'UploadedFile' is injected into this setter to trigger the update. If this
+     * of 'ImageFile' is injected into this setter to trigger the update. If this
      * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
      * must be able to accept an instance of 'File' as the bundle will inject one here
      * during Doctrine hydration.
      *
      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $file
      */
-    public function setFile(?File $file = null): void
+    public function setFile(?File $file = null): self
     {
         $this->file = $file;
 
@@ -105,6 +106,7 @@ class UploadedFile
             // otherwise the event listeners won't be called and the file is lost
             $this->updatedAt = new \DateTimeImmutable();
         }
+        return $this;
     }
 
     public function getFile(): ?File

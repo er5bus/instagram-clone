@@ -1,0 +1,16 @@
+{{ form_start(form) }}
+<div class="custom-file-container" data-upload-id="myUniqueUploadId">
+  <a href="javascript:void(0)" class="custom-file-container__image-clear" title="Clear Image"> {{ "Clear Images"|trans }} &times;</a>
+  <label class="custom-file-container__custom-file" >
+    {{ form_widget(form.files) }}
+    <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
+    <span class="custom-file-container__custom-file__custom-file-control"></span>
+  </label>
+  <div class="custom-file-container__image-preview"></div>
+</div>
+{{ form_widget(form) }}
+<div class="edit-profile__form-row">
+  <label class="edit-profile__label"></label>
+  <input type="submit" value="{{ button_label|default('Save') }}" />    </div>
+<div>
+  {{ form_end(form) }}
