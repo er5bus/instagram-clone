@@ -1,54 +1,25 @@
-FROM php:7.4-buster
-ARG TIMEZONE
+FROM php:7.4-cli
 
 LABEL MAINTAINER="Rami Sfari <rami2sfari@gmail.com>"
 
 COPY ./php/php.ini /usr/local/etc/php/conf.d/docker-php-config.ini
 
-RUN apt-get update && apt-get install -y \
-    gnupg \
-    g++ \
-    procps \
-    openssl \
-    git \
-    unzip \
-    zlib1g-dev \
-    libzip-dev \
-    libfreetype6-dev \
-    libpng-dev \
-    libjpeg-dev \
-    libicu-dev  \
-    libonig-dev \
-    libxslt1-dev \
-    acl \
-    nginx \
-    && echo 'alias sf="php bin/console"' >> ~/.bashrc
+RUN apt-get update && apt-get install -y  zlib1g-dev libzip-dev libfreetype6-dev libpng-dev libjpeg-dev \
+  libicu-dev libonig-dev libxslt1-dev acl
 
 RUN docker-php-ext-configure gd --with-jpeg --with-freetype 
 
-RUN docker-php-ext-install \
-    pdo pdo_mysql zip xsl gd intl opcache exif mbstring php7.4-fpm
-
-# Set timezone
-RUN ln -snf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && echo ${TIMEZONE} > /etc/timezone \
-    && printf '[PHP]\ndate.timezone = "%s"\n', ${TIMEZONE} > /usr/local/etc/php/conf.d/tzone.ini \
-    && "date"
+RUN docker-php-ext-install pdo_mysql zip gd intl
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN curl -LsS https://get.symfony.com/cli/installer -o /usr/local/bin/symfony && chmod a+x /usr/local/bin/symfony
 
 WORKDIR /var/www/project
-COPY ./composer* ./
 
-
+# install dependency
+COPY . .
 RUN composer install
 
-COPY . .
+EXPOSE 8000
 
-# replace with custom one
-COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
-COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
-
-
-EXPOSE 5000
-
-CMD nginx -g 'daemon off;'
+CMD php bin/console server:run 0.0.0.0:8000
