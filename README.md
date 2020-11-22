@@ -24,7 +24,7 @@ Installation
 Now clone the project from github.
 
 ```bash
-$ git clone https://github.com/R-sfari/instagram-clone.git
+$ git clone https://github.com/er5bus/instagram-clone.git
 ```
 
 ### Step 2 : Install dependencies
